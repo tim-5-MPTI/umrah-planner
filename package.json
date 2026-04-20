@@ -3,15 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "format": "prettier --write ."
   },
   "dependencies": {
-    "next": "16.2.2",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "@supabase/supabase-js": "^2.x.x",
+    "@supabase/ssr": "^0.x.x",
+    "date-fns": "^3.x.x",
+    "html2pdf.js": "^0.10.x",
+    "lucide-react": "^0.x.x",
+    "next": "14.x.x",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.x.x",
+    "zod": "^3.x.x",
+    "@hookform/resolvers": "^3.x.x"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -20,7 +29,11 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
+
 }

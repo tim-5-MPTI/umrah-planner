@@ -31,7 +31,9 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+# .gitignore sudah otomatis berisi ini dari create-next-app:
+.env.local
+.env*.local
 
 # vercel
 .vercel
