@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "next lint",
-  "format": "prettier --write ."
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.x.x",
+    "@hookform/resolvers": "^3.x.x",
     "@supabase/ssr": "^0.x.x",
+    "@supabase/supabase-js": "^2.x.x",
+    "clsx": "^2.1.1",
     "date-fns": "^3.x.x",
     "html2pdf.js": "^0.10.x",
     "lucide-react": "^0.x.x",
@@ -20,10 +22,11 @@
     "react-dom": "^18",
     "react-hook-form": "^7.x.x",
     "zod": "^3.x.x",
-    "@hookform/resolvers": "^3.x.x"
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/html2pdf.js": "^0.10.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -35,5 +38,4 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   }
-
 }
