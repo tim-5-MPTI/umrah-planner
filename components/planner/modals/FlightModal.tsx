@@ -57,8 +57,16 @@ export default function FlightModal() {
                     borderColor: isSelected ? '#735C00' : '#D4CCB0',
                     background: isSelected ? '#FBFBE2' : '#F9F6F0',
                   }}>
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg flex-shrink-0"
-                    style={{ background: '#EAEAD1' }}>✈</div>
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden"
+                    style={{ background: '#EAEAD1' }}>
+                    {flight.airlines.toLowerCase().includes('garuda') ? (
+                    <img src="/images/airlines/garuda-indonesia-logo.png" alt="Garuda" className="w-8 h-8 object-contain" />
+                    ) : flight.airlines.toLowerCase().includes('emirates') ? (
+                    <img src="/images/airlines/emirates-logo.png" alt="Emirates" className="w-8 h-8 object-contain" />
+                    ) : (
+                    <span className="text-lg">✈</span>
+                    )}
+                    </div>
                   <div className="flex-1">
                     <p className="text-sm font-semibold" style={{ color: '#26170C' }}>
                       {flight.airlines}
