@@ -43,9 +43,7 @@ export default function PlannerPage() {
           <div className="lg:col-span-2 space-y-4">
             <BudgetSection />
             <DateDurationSection />
-            <DateDurationSection />
             <JamaahSection />
-            <TransportMealSection />
             <TransportMealSection />
             <FlightSection />
             <HotelSection city="Makkah" />

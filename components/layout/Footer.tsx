@@ -12,7 +12,7 @@ export default function Footer() {
             <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
           </div>
           <p className="text-xs" style={{ color: '#735C00' }}>
-            © 2024 Umrah Planner. All rights reserved.
+            © 2026 Umrah Planner. All rights reserved.
           </p>
         </div>
       </div>
