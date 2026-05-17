@@ -1,11 +1,9 @@
 // lib/types.ts
 
-// ============================================
-// DATABASE TYPES (sesuai schema Supabase)
-// ============================================
-
 export type CityEnum = 'Makkah' | 'Madinah'
 export type RoomTypeEnum = 'Single' | 'Double' | 'Triple' | 'Quad'
+export type ModalType = 'flight' | 'hotel-makkah' | 'hotel-madinah' | 'hotel-detail' | null
+export type FlightClass = 'economy' | 'business'
 
 export interface SystemConstant {
   id: string
@@ -58,10 +56,6 @@ export interface DateRecommendation {
   created_at: string
 }
 
-// ============================================
-// PLANNER FORM TYPES
-// ============================================
-
 export type BudgetPreset =
   | 'under_20m'
   | '20m_30m'
@@ -106,12 +100,7 @@ export interface MealOptionConfig {
   key_name: string
 }
 
-// ============================================
-// PLANNER STATE TYPES (Zustand Store)
-// ============================================
-
 export interface PlannerFormData {
-  // Step 1 — Tanggal, anggaran, jamaah
   departure_date: string | null
   return_date: string | null
   budget_preset: BudgetPreset | null
@@ -119,24 +108,16 @@ export interface PlannerFormData {
   is_no_limit: boolean
   adult_count: number
   child_count: number
-
-  // Step 2 — Penerbangan
   origin_airport: string | null
   destination_airport: string | null
   selected_flight: Flight | null
-
-  // Step 3 — Transportasi & makan
   selected_transport: TransportOption | null
   selected_meal: MealOption | null
-
-  // Step 4 — Hotel
   distance_preference: number | null
   selected_hotel_makkah: Hotel | null
   selected_room_makkah: Room | null
   selected_hotel_madinah: Hotel | null
   selected_room_madinah: Room | null
-
-  // Step 5 — Durasi malam
   nights_makkah: number
   nights_madinah: number
 }
@@ -149,10 +130,6 @@ export interface PlannerState extends PlannerFormData {
   updateForm: (data: Partial<PlannerFormData>) => void
   resetForm: () => void
 }
-
-// ============================================
-// CALCULATOR TYPES
-// ============================================
 
 export interface FixedCosts {
   visa: number
@@ -193,33 +170,16 @@ export interface CalculatorInput {
   constants: Record<string, number>
 }
 
-// ============================================
-// RESULT / OUTPUT TYPES
-// ============================================
-
 export interface PlannerResult {
   form: PlannerFormData
   breakdown: CostBreakdown
   generated_at: string
 }
 
-// ============================================
-// API RESPONSE TYPES
-// ============================================
-
 export interface ApiResponse<T> {
   data: T | null
   error: string | null
 }
-
-export interface FlightsResponse extends ApiResponse<Flight[]> {}
-export interface HotelsResponse extends ApiResponse<Hotel[]> {}
-export interface ConstantsResponse extends ApiResponse<SystemConstant[]> {}
-export interface DateRecsResponse extends ApiResponse<DateRecommendation[]> {}
-
-// ============================================
-// UI COMPONENT PROP TYPES
-// ============================================
 
 export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'

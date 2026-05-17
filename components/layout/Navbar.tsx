@@ -1,29 +1,30 @@
 import Link from 'next/link'
-import Button from '@/components/ui/Button'
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F5F0E8] border-b border-[#E8DFD0]">
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 border-b"
+      style={{ background: '#FDFBF7', borderColor: '#D4CCB0' }}
+    >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-lg font-bold text-[#3D2B1F]">
-            umrah<span className="text-[#C9A96E]">planner</span>
-          </span>
-        </Link>
+  <img src="/images/logo.png" alt="Umratee" className="h-8 w-auto" />
+</Link>
 
         <div className="hidden md:flex items-center gap-8">
-          <Link href="/" className="text-sm text-[#8B6F5E] hover:text-[#3D2B1F] transition-colors">
-            Beranda
-          </Link>
-          <Link href="/planner" className="text-sm text-[#8B6F5E] hover:text-[#3D2B1F] transition-colors">
-            Planner
-          </Link>
+          <Link href="/" className="text-sm transition-colors"
+            style={{ color: '#3D2B1F' }}>Beranda</Link>
+          <Link href="/planner" className="text-sm transition-colors"
+            style={{ color: '#3D2B1F' }}>Planner</Link>
         </div>
 
         <Link href="/planner">
-          <Button variant="primary" size="sm">
+          <button
+            className="px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
+            style={{ background: '#26170C', color: '#FDFBF7' }}
+          >
             Mulai Planner
-          </Button>
+          </button>
         </Link>
       </div>
     </nav>

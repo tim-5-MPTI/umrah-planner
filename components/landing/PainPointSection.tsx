@@ -3,29 +3,34 @@ const painPoints = [
     icon: '💸',
     title: 'Bingung biaya total',
     desc: 'Sulit menghitung total pengeluaran dari berbagai komponen hingga akumulasi.',
+    bg: '#FDFBF7',
   },
   {
     icon: '📋',
     title: 'Takut salah aturan visa',
     desc: 'Persyaratan visa yang berubah-ubah dan rumit sangat membingungkan.',
+    bg: '#FDFBF7',
   },
   {
     icon: '🌐',
     title: 'Informasi tersebar',
     desc: 'Info harga dari berbagai sumber yang tidak terpercaya dan tidak terstruktur.',
+    bg: '#FDFBF7',
   },
 ]
 
 export default function PainPointSection() {
   return (
-    <section className="bg-[#E8DFD0] py-20">
+    <section className="py-20" style={{ background: '#D4CCB0' }}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 items-start">
           <div className="md:col-span-1">
-            <h2 className="text-2xl font-bold text-[#3D2B1F] leading-tight">
+            <h2 className="text-2xl font-bold leading-tight"
+              style={{ color: '#26170C' }}>
               Mengapa Perencanaan Sering Terasa Berat?
             </h2>
-            <p className="text-sm text-[#8B6F5E] mt-3 leading-relaxed">
+            <p className="text-sm mt-3 leading-relaxed"
+              style={{ color: '#3D2B1F', opacity: 0.7 }}>
               Kami memahami kesulitan di balik niat suci Anda. Biarkan kami menyederhanakannya.
             </p>
           </div>
@@ -34,15 +39,18 @@ export default function PainPointSection() {
             {painPoints.map((item, i) => (
               <div
                 key={i}
-                className="bg-white rounded-xl p-5 border border-[#E8DFD0]"
+                className="rounded-2xl p-5 border"
+                style={{
+                  background: item.bg,
+                  borderColor: '#C5A059',
+                  borderWidth: '1px',
+                }}
               >
                 <div className="text-2xl mb-3">{item.icon}</div>
-                <h3 className="font-semibold text-[#3D2B1F] text-sm mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-[#8B6F5E] leading-relaxed">
-                  {item.desc}
-                </p>
+                <h3 className="font-semibold text-sm mb-2"
+                  style={{ color: '#26170C' }}>{item.title}</h3>
+                <p className="text-xs leading-relaxed"
+                  style={{ color: '#3D2B1F', opacity: 0.7 }}>{item.desc}</p>
               </div>
             ))}
           </div>

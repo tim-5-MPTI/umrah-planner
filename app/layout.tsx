@@ -11,11 +11,7 @@ export const metadata: Metadata = {
   description: 'Platform perencana ibadah umrah mandiri berbasis web',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id">
       <body className={inter.className}>
