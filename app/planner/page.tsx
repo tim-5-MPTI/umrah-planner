@@ -10,6 +10,7 @@ import SummaryPanel from '@/components/planner/SummaryPanel'
 import FlightModal from '@/components/planner/modals/FlightModal'
 import HotelListModal from '@/components/planner/modals/HotelListModal'
 import HotelDetailModal from '@/components/planner/modals/HotelDetailModal'
+import JamaahSection from '@/components/planner/sections/JamaahSection'
 
 export default function PlannerPage() {
   return (
@@ -42,6 +43,9 @@ export default function PlannerPage() {
           <div className="lg:col-span-2 space-y-4">
             <BudgetSection />
             <DateDurationSection />
+            <DateDurationSection />
+            <JamaahSection />
+            <TransportMealSection />
             <TransportMealSection />
             <FlightSection />
             <HotelSection city="Makkah" />
