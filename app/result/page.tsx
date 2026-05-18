@@ -8,6 +8,7 @@ import { useExportPdf } from '@/hooks/useExportPdf'
 import { formatIDR } from '@/utils/formatCurrency'
 import { formatDate } from '@/lib/utils'
 import { TRANSPORT_OPTIONS, MEAL_OPTIONS } from '@/constants/budgetPresets'
+import PdfTemplate from '@/components/result/PdfTemplate'
 
 export default function ResultPage() {
   const router = useRouter()
@@ -66,49 +67,47 @@ export default function ResultPage() {
 
   return (
     <div className="min-h-screen" style={{ background: '#FDFBF7' }}>
-      <div className="max-w-6xl mx-auto px-6 py-8">
 
-        {/* ── Header Card ── */}
-        <div className="rounded-3xl mb-6 relative overflow-hidden"
-          style={{ background: '#FDFBF7', border: '1px solid #D4CCB0', minHeight: '200px' }}>
+      {/* Hidden PDF template */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        zIndex: -9999,
+        opacity: 0.01,
+        pointerEvents: 'none',
+        width: '794px',
+      }}>
+        <PdfTemplate form={store} breakdown={breakdown} />
+      </div>
 
-          {/* Foto Ka'bah kanan */}
-          <div className="absolute right-0 top-0 h-full w-2/5 pointer-events-none">
-            <img
-              src="/images/kakbah.png"
-              alt="Ka'bah"
-              className="w-full h-full object-cover object-center"
-            />
-            {/* Gradient fade ke kiri */}
-            <div className="absolute inset-0" style={{
-              background: 'linear-gradient(to right, #FDFBF7 0%, rgba(253,251,247,0.6) 40%, rgba(253,251,247,0) 100%)'
-            }} />
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-8">
+
+        {/* Header dark card */}
+        <div className="rounded-3xl p-5 md:p-8 mb-6 relative"
+          style={{ background: '#26170C' }}>
+          <div className="absolute right-8 top-1/2 -translate-y-1/2 text-9xl opacity-10 select-none">
+            🕋
           </div>
-
-          {/* Konten kiri */}
-          <div className="relative z-10 p-8 max-w-lg">
-            <p className="text-xs uppercase tracking-widest font-medium mb-2"
-              style={{ color: '#735C00' }}>
+          <div className="relative z-10 max-w-[85%] sm:max-w-full">
+            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: '#D4CCB0' }}>
               Ringkasan Perjalanan Anda
             </p>
-            <p className="text-sm mb-1" style={{ color: '#8B7355' }}>
+            <p className="text-xs md:text-sm mb-1" style={{ color: '#D4CCB0' }}>
               Estimasi Total Perjalanan
             </p>
-            <p className="text-5xl font-bold mb-1" style={{ color: '#26170C' }}>
+            <p className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 break-all" style={{ color: '#FDFBF7' }}>
               {breakdown ? formatIDR(breakdown.total) : 'Rp 0'}
             </p>
-            <p className="text-xs mb-4" style={{ color: '#735C00' }}>
-              Termasuk pajak & biaya layanan
-            </p>
 
-            {isOverBudget && breakdown && (
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium mb-4"
-                style={{ background: 'rgba(186,26,44,0.08)', border: '1px solid #BA1A2C', color: '#BA1A2C' }}>
-                ⚠ Melebihi target budget {formatIDR(store.budget_amount ?? 0)} ({Math.round(Math.abs(breakdown.remaining_budget ?? 0) / (store.budget_amount ?? 1) * 100)}%)
+           {isOverBudget && breakdown && (
+              <div className="flex flex-wrap items-center gap-2 px-3 md:px-4 py-2 rounded-xl text-xs md:text-sm font-medium mb-4 w-fit"
+                style={{ background: 'rgba(255,218,214,0.2)', border: '1px solid #FFDAD6', color: '#FFDAD6' }}>
+                ⚠ Melebihi target budget {formatIDR(store.budget_amount ?? 0)}
               </div>
             )}
 
-            <div className="flex items-center gap-3 flex-wrap mt-2">
+            <div className="flex items-center gap-2 md:gap-3 flex-wrap mt-4">
               {[
                 { label: store.origin_airport ?? 'CGK', sub: 'Jakarta' },
                 { label: '→', sub: '' },
@@ -121,56 +120,56 @@ export default function ResultPage() {
                 { label: store.origin_airport ?? 'CGK', sub: 'Jakarta' },
               ].map((item, i) =>
                 item.label === '→'
-                  ? <span key={i} style={{ color: '#C5A059' }}>→</span>
+                  ? <span key={i} style={{ color: '#D4CCB0' }}>→</span>
                   : (
                     <div key={i} className="text-center">
-                      <p className="text-sm font-semibold" style={{ color: '#26170C' }}>{item.label}</p>
-                      {item.sub && <p className="text-xs" style={{ color: '#735C00' }}>{item.sub}</p>}
+                      <p className="text-xs md:text-sm font-semibold" style={{ color: '#FDFBF7' }}>{item.label}</p>
+                      {item.sub && <p className="text-xs" style={{ color: '#D4CCB0' }}>{item.sub}</p>}
                     </div>
                   )
               )}
             </div>
 
-            <div className="flex gap-4 mt-3 flex-wrap">
+            <div className="flex gap-4 md:gap-6 mt-4 flex-wrap">
               {store.budget_amount && (
-                <span className="text-xs" style={{ color: '#735C00' }}>
+                <span className="text-xs" style={{ color: '#D4CCB0' }}>
                   💰 {store.is_no_limit ? 'Tanpa Limit' : formatIDR(store.budget_amount)}
                 </span>
               )}
               {store.departure_date && (
-                <span className="text-xs" style={{ color: '#735C00' }}>
+                <span className="text-xs" style={{ color: '#D4CCB0' }}>
                   📅 {formatDate(store.departure_date)}
                 </span>
               )}
               {store.return_date && (
-                <span className="text-xs" style={{ color: '#735C00' }}>
+                <span className="text-xs" style={{ color: '#D4CCB0' }}>
                   📅 {formatDate(store.return_date)}
                 </span>
               )}
-              <span className="text-xs" style={{ color: '#735C00' }}>
-                👥 {totalPax} Orang
-              </span>
+              <span className="text-xs" style={{ color: '#D4CCB0' }}>👥 {totalPax} Orang</span>
             </div>
           </div>
         </div>
 
-        {/* ── Two Column ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Two column */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
 
-          {/* Left — Rincian */}
+          {/* Left */}
           <div className="lg:col-span-2 space-y-4">
             <div>
-              <h2 className="font-bold text-xl mb-1" style={{ color: '#26170C' }}>Rincian Biaya</h2>
+              <h2 className="font-bold text-lg md:text-xl mb-1" style={{ color: '#26170C' }}>
+                Rincian Biaya
+              </h2>
               <p className="text-sm" style={{ color: '#735C00' }}>
                 Berikut adalah biaya perjalanan yang telah kami rencanakan untuk Anda
               </p>
             </div>
 
             {costItems.map((item, i) => (
-              <div key={i} className="rounded-2xl p-5 flex items-center justify-between border"
+              <div key={i} className="rounded-2xl p-4 md:p-5 flex items-center justify-between border"
                 style={{ background: '#F9F6F0', borderColor: '#D4CCB0' }}>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+                <div className="flex items-center gap-3 md:gap-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center text-lg md:text-xl flex-shrink-0"
                     style={{ background: '#EAEAD1' }}>
                     {item.icon}
                   </div>
@@ -181,19 +180,19 @@ export default function ResultPage() {
                     <p className="text-xs" style={{ color: '#735C00' }}>{item.sub}</p>
                   </div>
                 </div>
-                <p className="text-base font-bold" style={{ color: '#26170C' }}>
+                <p className="text-sm md:text-base font-bold flex-shrink-0 ml-2" style={{ color: '#26170C' }}>
                   {formatIDR(item.amount)}
                 </p>
               </div>
             ))}
 
             {/* Doa */}
-            <div className="rounded-2xl p-6 text-center"
+            <div className="rounded-2xl p-5 md:p-6 text-center"
               style={{ background: '#FBFBE2', border: '1px solid #C5A059' }}>
-              <p className="text-2xl mb-2" style={{ color: '#26170C', fontFamily: 'serif' }}>
+              <p className="text-xl md:text-2xl mb-2" style={{ color: '#26170C', fontFamily: 'serif' }}>
                 تَقَبَّلَ اللّٰهُ مِنَّا وَمِنْكُمْ
               </p>
-              <p className="text-xs italic mb-2" style={{ color: '#735C00' }}>
+              <p className="text-xs italic mb-3" style={{ color: '#735C00' }}>
                 "Semoga Allah menerima (ibadah) dari kami dan dari kamu"
               </p>
               <p className="text-xs leading-relaxed" style={{ color: '#735C00' }}>
@@ -202,10 +201,8 @@ export default function ResultPage() {
             </div>
           </div>
 
-          {/* Right — Summary */}
+          {/* Right */}
           <div className="space-y-4">
-
-            {/* Ringkasan dana */}
             <div className="rounded-2xl p-5" style={{ background: '#26170C' }}>
               <p className="text-xs uppercase tracking-wide mb-4" style={{ color: '#D4CCB0' }}>
                 Ringkasan Dana
@@ -240,7 +237,6 @@ export default function ResultPage() {
               </div>
             </div>
 
-            {/* Visa notes */}
             <div className="rounded-2xl p-5"
               style={{ background: '#F9F6F0', border: '1px solid #C5A059' }}>
               <p className="text-sm font-semibold mb-3" style={{ color: '#26170C' }}>
@@ -264,7 +260,6 @@ export default function ResultPage() {
               </div>
             </div>
 
-            {/* Buttons */}
             <button
               onClick={() => exportPdf({
                 form: store as any,
@@ -298,5 +293,5 @@ export default function ResultPage() {
         </div>
       </div>
     </div>
-  )
+    )
 }
