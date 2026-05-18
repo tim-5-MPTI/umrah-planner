@@ -10,6 +10,9 @@ export default function DateDurationSection() {
   const isReturnBeforeDeparture =
     departure_date && return_date && return_date <= departure_date
 
+  const totalPlanned = nights_makkah + nights_madinah
+  const isNightsExceeded = totalNights > 0 && totalPlanned > totalNights
+
   return (
     <div className="rounded-2xl border p-5 space-y-4"
       style={{ background: '#FDFBF7', borderColor: '#C5A059' }}>
@@ -29,6 +32,7 @@ export default function DateDurationSection() {
         </p>
       </div>
 
+      {/* Input Tanggal */}
       <div className="grid grid-cols-2 gap-3">
         {[
           { label: 'Berangkat', key: 'departure_date', value: departure_date },
@@ -53,7 +57,7 @@ export default function DateDurationSection() {
         ))}
       </div>
 
-      {/* Alert tanggal tidak valid */}
+      {/* Alert: tanggal pulang lebih awal dari berangkat */}
       {isReturnBeforeDeparture && (
         <div className="rounded-xl px-4 py-3 flex items-start gap-2"
           style={{ background: '#FFF0EE', border: '1px solid #BA1A2C' }}>
@@ -64,6 +68,7 @@ export default function DateDurationSection() {
         </div>
       )}
 
+      {/* Badge total malam */}
       {totalNights > 0 && !isReturnBeforeDeparture && (
         <div className="flex justify-end">
           <span className="text-xs px-3 py-1 rounded-full font-semibold"
@@ -77,6 +82,7 @@ export default function DateDurationSection() {
         Durasi Perjalanan Terencana
       </p>
 
+      {/* Input malam Makkah & Madinah */}
       <div className="grid grid-cols-2 gap-3">
         {[
           { label: 'Malam di Makkah', key: 'nights_makkah', value: nights_makkah },
@@ -104,6 +110,38 @@ export default function DateDurationSection() {
           </div>
         ))}
       </div>
+
+      {/* Ringkasan total malam direncanakan */}
+      <div className="flex items-center justify-between rounded-xl px-4 py-2"
+        style={{
+          background: isNightsExceeded ? '#FFF0EE' : '#F9F6F0',
+          border: `1px solid ${isNightsExceeded ? '#BA1A2C' : '#D4CCB0'}`
+        }}>
+        <span className="text-xs" style={{ color: isNightsExceeded ? '#BA1A2C' : '#735C00' }}>
+          Total direncanakan
+        </span>
+        <span className="text-xs font-bold" style={{ color: isNightsExceeded ? '#BA1A2C' : '#26170C' }}>
+          {totalPlanned} malam
+          {totalNights > 0 && (
+            <span className="font-normal" style={{ color: isNightsExceeded ? '#BA1A2C' : '#735C00' }}>
+              {' '}/ {totalNights} malam tersedia
+            </span>
+          )}
+        </span>
+      </div>
+
+      {/* Alert: total malam melebihi durasi perjalanan */}
+      {isNightsExceeded && (
+        <div className="rounded-xl px-4 py-3 flex items-start gap-2"
+          style={{ background: '#FFF0EE', border: '1px solid #BA1A2C' }}>
+          <span className="text-sm flex-shrink-0">⚠️</span>
+          <p className="text-xs font-medium" style={{ color: '#BA1A2C' }}>
+            Makkah ({nights_makkah} malam) + Madinah ({nights_madinah} malam) ={' '}
+            <span className="font-bold">{totalPlanned} malam</span>, melebihi durasi perjalanan{' '}
+            <span className="font-bold">{totalNights} malam</span>. Kurangi jumlah malam atau perpanjang tanggal kepulangan.
+          </p>
+        </div>
+      )}
     </div>
   )
 }
