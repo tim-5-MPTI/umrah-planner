@@ -15,7 +15,7 @@ import JamaahSection from '@/components/planner/sections/JamaahSection'
 export default function PlannerPage() {
   return (
     <div className="min-h-screen" style={{ background: '#FDFBF7' }}>
-      <div className="max-w-6xl mx-auto px-6 py-8">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-8">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm mb-6 hover:opacity-70 transition-opacity"
@@ -29,7 +29,7 @@ export default function PlannerPage() {
             style={{ color: '#735C00' }}>
             Perencanaan Umum
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold leading-tight"
+          <h1 className="text-2xl md:text-4xl font-bold leading-tight"
             style={{ color: '#26170C' }}>
             Rencanakan Perjalanan Suci
             <br />
@@ -39,7 +39,7 @@ export default function PlannerPage() {
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
           <div className="lg:col-span-2 space-y-4">
             <BudgetSection />
             <DateDurationSection />
