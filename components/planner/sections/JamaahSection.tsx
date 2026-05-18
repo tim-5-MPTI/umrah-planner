@@ -13,7 +13,7 @@ export default function JamaahSection() {
         <h2 className="font-semibold" style={{ color: '#26170C' }}>Jumlah Jamaah</h2>
       </div>
 
-      <div className="rounded-xl border p-4 grid grid-cols-2 gap-4"
+      <div className="rounded-xl border p-4 space-y-3"
         style={{ borderColor: '#C5A059', background: '#F9F6F0' }}>
 
         {/* Dewasa */}
@@ -23,16 +23,16 @@ export default function JamaahSection() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => updateForm({ adult_count: Math.max(1, adult_count - 1) })}
-              className="w-8 h-8 rounded-full border flex items-center justify-center font-bold text-lg transition-all hover:opacity-80"
+              className="w-9 h-9 rounded-full border flex items-center justify-center font-bold text-lg transition-all hover:opacity-80"
               style={{ borderColor: '#C5A059', color: '#26170C', background: '#FDFBF7' }}>
               −
             </button>
-            <span className="text-lg font-bold w-5 text-center" style={{ color: '#26170C' }}>
+            <span className="text-lg font-bold w-6 text-center" style={{ color: '#26170C' }}>
               {adult_count}
             </span>
             <button
               onClick={() => updateForm({ adult_count: adult_count + 1 })}
-              className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-lg transition-all hover:opacity-80"
+              className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-lg transition-all hover:opacity-80"
               style={{ background: '#26170C', color: '#FDFBF7' }}>
               +
             </button>
@@ -46,16 +46,16 @@ export default function JamaahSection() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => updateForm({ child_count: Math.max(0, child_count - 1) })}
-              className="w-8 h-8 rounded-full border flex items-center justify-center font-bold text-lg transition-all hover:opacity-80"
+              className="w-9 h-9 rounded-full border flex items-center justify-center font-bold text-lg transition-all hover:opacity-80"
               style={{ borderColor: '#C5A059', color: '#26170C', background: '#FDFBF7' }}>
               −
             </button>
-            <span className="text-lg font-bold w-5 text-center" style={{ color: '#26170C' }}>
+            <span className="text-lg font-bold w-6 text-center" style={{ color: '#26170C' }}>
               {child_count}
             </span>
             <button
               onClick={() => updateForm({ child_count: child_count + 1 })}
-              className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-lg transition-all hover:opacity-80"
+              className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-lg transition-all hover:opacity-80"
               style={{ background: '#26170C', color: '#FDFBF7' }}>
               +
             </button>

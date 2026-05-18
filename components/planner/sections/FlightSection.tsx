@@ -48,38 +48,44 @@ export default function FlightSection() {
       </div>
 
       {store.selected_flight ? (
-        <div className="rounded-xl p-4 flex items-center gap-4 border"
+        <div className="rounded-xl p-4 border"
           style={{ borderColor: '#C5A059', background: '#F9F6F0' }}>
-         <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden"
-            style={{ background: '#EAEAD1' }}>
-            {store.selected_flight.airlines.toLowerCase().includes('garuda') ? (
-            <img src="/images/airlines/garuda-indonesia-logo.png" alt="Garuda" className="w-8 h-8 object-contain" />
-            ) : store.selected_flight.airlines.toLowerCase().includes('emirates') ? (
-            <img src="/images/airlines/emirates-logo.png" alt="Emirates" className="w-8 h-8 object-contain" />
-            ) : (
-        <span className="text-lg">✈</span>
-        )}
+          {/* Row atas: logo + info maskapai */}
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden"
+              style={{ background: '#EAEAD1' }}>
+              {store.selected_flight.airlines.toLowerCase().includes('garuda') ? (
+                <img src="/images/airlines/garuda-indonesia-logo.png" alt="Garuda" className="w-8 h-8 object-contain" />
+              ) : store.selected_flight.airlines.toLowerCase().includes('emirates') ? (
+                <img src="/images/airlines/emirates-logo.png" alt="Emirates" className="w-8 h-8 object-contain" />
+              ) : (
+                <span className="text-lg">✈</span>
+              )}
             </div>
-          <div className="flex-1">
-            <p className="text-sm font-semibold" style={{ color: '#26170C' }}>
-              {store.selected_flight.airlines}
-            </p>
-            <p className="text-xs" style={{ color: '#735C00' }}>
-              {store.selected_flight.departure_time} → {store.selected_flight.arrival_time}
-              {' '}• {store.selected_flight.flight_type}
-            </p>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold truncate" style={{ color: '#26170C' }}>
+                {store.selected_flight.airlines}
+              </p>
+              <p className="text-xs" style={{ color: '#735C00' }}>
+                {store.selected_flight.departure_time} → {store.selected_flight.arrival_time}
+                {' '}• {store.selected_flight.flight_type}
+              </p>
+            </div>
           </div>
-          <div className="text-right">
-            <p className="text-sm font-bold" style={{ color: '#26170C' }}>
-              {formatIDR(store.selected_flight.price_idr * totalPax)}
-            </p>
-            <p className="text-xs" style={{ color: '#735C00' }}>Termasuk Bagasi 30kg</p>
+          {/* Row bawah: harga + tombol */}
+          <div className="flex items-center justify-between gap-2">
+            <div>
+              <p className="text-sm font-bold" style={{ color: '#26170C' }}>
+                {formatIDR(store.selected_flight.price_idr * totalPax)}
+              </p>
+              <p className="text-xs" style={{ color: '#735C00' }}>Termasuk Bagasi 30kg</p>
+            </div>
+            <button onClick={() => store.setModal('flight')}
+              className="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold"
+              style={{ background: '#BA1A2C', color: '#FDFBF7' }}>
+              Ganti Pilihan
+            </button>
           </div>
-          <button onClick={() => store.setModal('flight')}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold"
-            style={{ background: '#BA1A2C', color: '#FDFBF7' }}>
-            Ganti Pilihan
-          </button>
         </div>
       ) : (
         <button onClick={() => store.setModal('flight')}

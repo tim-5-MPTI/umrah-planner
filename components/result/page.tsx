@@ -96,12 +96,13 @@ export default function ResultPage() {
             <p className="text-xs md:text-sm mb-1" style={{ color: '#D4CCB0' }}>
               Estimasi Total Perjalanan
             </p>
-            <p className="text-3xl md:text-5xl font-bold mb-4" style={{ color: '#FDFBF7' }}>
+            {/* FIX: break-all + responsive font size agar angka tidak terpotong di mobile */}
+            <p className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 break-all" style={{ color: '#FDFBF7' }}>
               {breakdown ? formatIDR(breakdown.total) : 'Rp 0'}
             </p>
 
-            {isOverBudget && breakdown && (
-              <div className="inline-flex items-center gap-2 px-3 md:px-4 py-2 rounded-xl text-xs md:text-sm font-medium mb-4"
+           {isOverBudget && breakdown && (
+              <div className="flex flex-wrap items-center gap-2 px-3 md:px-4 py-2 rounded-xl text-xs md:text-sm font-medium mb-4 w-fit"
                 style={{ background: 'rgba(255,218,214,0.2)', border: '1px solid #FFDAD6', color: '#FFDAD6' }}>
                 ⚠ Melebihi target budget {formatIDR(store.budget_amount ?? 0)}
               </div>
@@ -293,5 +294,5 @@ export default function ResultPage() {
         </div>
       </div>
     </div>
-  )
+    )
 }
