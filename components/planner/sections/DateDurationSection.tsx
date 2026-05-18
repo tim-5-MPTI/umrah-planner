@@ -7,6 +7,9 @@ export default function DateDurationSection() {
   const { departure_date, return_date, nights_makkah, nights_madinah, updateForm } = usePlannerStore()
   const totalNights = getTotalNights(departure_date, return_date)
 
+  const isReturnBeforeDeparture =
+    departure_date && return_date && return_date <= departure_date
+
   return (
     <div className="rounded-2xl border p-5 space-y-4"
       style={{ background: '#FDFBF7', borderColor: '#C5A059' }}>
@@ -39,13 +42,29 @@ export default function DateDurationSection() {
               value={item.value ?? ''}
               onChange={(e) => updateForm({ [item.key]: e.target.value } as any)}
               className="w-full px-3 py-2.5 rounded-xl text-sm focus:outline-none border"
-              style={{ background: '#F9F6F0', borderColor: '#C5A059', color: '#26170C' }}
+              style={{
+                background: '#F9F6F0',
+                borderColor: isReturnBeforeDeparture && item.key === 'return_date' ? '#BA1A2C' : '#C5A059',
+                color: '#26170C',
+                outline: isReturnBeforeDeparture && item.key === 'return_date' ? '2px solid #BA1A2C' : 'none',
+              }}
             />
           </div>
         ))}
       </div>
 
-      {totalNights > 0 && (
+      {/* Alert tanggal tidak valid */}
+      {isReturnBeforeDeparture && (
+        <div className="rounded-xl px-4 py-3 flex items-start gap-2"
+          style={{ background: '#FFF0EE', border: '1px solid #BA1A2C' }}>
+          <span className="text-sm flex-shrink-0">⚠️</span>
+          <p className="text-xs font-medium" style={{ color: '#BA1A2C' }}>
+            Tanggal pulang tidak boleh sama atau lebih awal dari tanggal berangkat. Mohon periksa kembali tanggal yang dipilih.
+          </p>
+        </div>
+      )}
+
+      {totalNights > 0 && !isReturnBeforeDeparture && (
         <div className="flex justify-end">
           <span className="text-xs px-3 py-1 rounded-full font-semibold"
             style={{ background: '#26170C', color: '#FFE088' }}>
