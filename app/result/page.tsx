@@ -83,24 +83,30 @@ export default function ResultPage() {
 
       <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-8">
 
-        {/* Header dark card */}
+        {/* Header dark card — FIXED: hapus overflow-hidden, pisah konten & dekorasi */}
         <div className="rounded-3xl p-5 md:p-8 mb-6 relative"
           style={{ background: '#26170C' }}>
-          <div className="absolute right-8 top-1/2 -translate-y-1/2 text-9xl opacity-10 select-none">
-            🕋
+
+          {/* Dekorasi 🕋 — dibatasi agar tidak clip konten */}
+          <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 text-9xl opacity-10 select-none">
+              🕋
+            </div>
           </div>
-          <div className="relative z-10 max-w-[85%] sm:max-w-full">
+
+          {/* Konten — full width, tidak terpotong */}
+          <div className="relative z-10">
             <p className="text-xs uppercase tracking-widest mb-2" style={{ color: '#D4CCB0' }}>
               Ringkasan Perjalanan Anda
             </p>
             <p className="text-xs md:text-sm mb-1" style={{ color: '#D4CCB0' }}>
               Estimasi Total Perjalanan
             </p>
-            <p className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 break-all" style={{ color: '#FDFBF7' }}>
+            <p className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 break-words" style={{ color: '#FDFBF7' }}>
               {breakdown ? formatIDR(breakdown.total) : 'Rp 0'}
             </p>
 
-           {isOverBudget && breakdown && (
+            {isOverBudget && breakdown && (
               <div className="flex flex-wrap items-center gap-2 px-3 md:px-4 py-2 rounded-xl text-xs md:text-sm font-medium mb-4 w-fit"
                 style={{ background: 'rgba(255,218,214,0.2)', border: '1px solid #FFDAD6', color: '#FFDAD6' }}>
                 ⚠ Melebihi target budget {formatIDR(store.budget_amount ?? 0)}
@@ -293,5 +299,5 @@ export default function ResultPage() {
         </div>
       </div>
     </div>
-    )
+  )
 }
