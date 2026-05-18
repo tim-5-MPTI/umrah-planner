@@ -45,7 +45,7 @@ export default function SummaryPanel() {
   ]
 
   return (
-    <div className="sticky top-24 rounded-2xl p-5 space-y-4 border"
+    <div className="lg:sticky lg:top-24 rounded-2xl p-4 md:p-5 space-y-4 border"
       style={{ background: '#F9F6F0', borderColor: '#C5A059' }}>
 
       <p className="text-xs font-medium uppercase tracking-wide" style={{ color: '#735C00' }}>
@@ -68,7 +68,7 @@ export default function SummaryPanel() {
 
       <div className="border-t pt-3" style={{ borderColor: '#D4CCB0' }}>
         <p className="text-xs mb-1" style={{ color: '#735C00' }}>Total Estimasi</p>
-        <p className="text-2xl font-bold" style={{ color: '#26170C' }}>
+        <p className="text-xl md:text-2xl font-bold" style={{ color: '#26170C' }}>
           {breakdown ? formatIDR(breakdown.total) : 'Rp 0'}
         </p>
       </div>
@@ -76,7 +76,7 @@ export default function SummaryPanel() {
       {isOverBudget && breakdown && (
         <div className="rounded-xl p-3"
           style={{ background: '#FFDAD633', border: '1px solid #FFDAD6' }}>
-          <p className="text-xs font-semibold flex items-center gap-1" style={{ color: '#BA1A2C' }}>
+          <p className="text-xs font-semibold" style={{ color: '#BA1A2C' }}>
             ⚠ Melebihi Target Budget
           </p>
           <p className="text-xs mt-1" style={{ color: '#BA1A2C' }}>

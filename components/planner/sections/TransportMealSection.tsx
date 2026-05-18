@@ -1,9 +1,17 @@
 'use client'
 
 import { usePlannerStore } from '@/store/plannerStore'
-import { TRANSPORT_OPTIONS, MEAL_OPTIONS } from '@/constants/budgetPresets'
+import { MEAL_OPTIONS } from '@/constants/budgetPresets'
 import { formatIDR } from '@/utils/formatCurrency'
 import type { TransportOption, MealOption } from '@/lib/types'
+
+const TRANSPORT_OPTIONS_WITH_ICONS = [
+  { value: 'bus', label: 'Bus (Ekonomi)', desc: 'Sesuai rombongan', price: 600000, icon: '/images/bus.png' },
+  { value: 'kereta', label: 'Kereta Cepat', desc: 'Haramain High-Speed', price: 1500000, icon: '/images/kereta.png' },
+  { value: 'mobil', label: 'Mobil Pribadi (Privat)', desc: 'GMC / Alphard', price: 2000000, icon: '/images/mobil.png' },
+  { value: 'travel', label: 'Travel (Pendamping)', desc: 'Layanan penyedia lokal', price: 1000000, icon: '/images/travel.png' },
+  { value: 'none', label: 'Tidak Include Kendaraan', desc: '', price: 0, icon: null },
+]
 
 export default function TransportMealSection() {
   const { selected_transport, selected_meal, updateForm } = usePlannerStore()
@@ -16,12 +24,13 @@ export default function TransportMealSection() {
         <h2 className="font-semibold" style={{ color: '#26170C' }}>Transportasi & Konsumsi Lokal</h2>
       </div>
 
+      {/* Transportasi */}
       <div>
         <p className="text-xs uppercase tracking-wide font-medium mb-3" style={{ color: '#735C00' }}>
           Pilihan Transportasi (Jeddah → Makkah → Madinah)
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-          {TRANSPORT_OPTIONS.map((opt) => {
+          {TRANSPORT_OPTIONS_WITH_ICONS.map((opt) => {
             const isSelected = selected_transport === opt.value
             return (
               <button key={opt.value}
@@ -31,17 +40,20 @@ export default function TransportMealSection() {
                   background: isSelected ? '#26170C' : '#F9F6F0',
                   borderColor: isSelected ? '#26170C' : '#C5A059',
                 }}>
+                {opt.icon && (
+                  <img src={opt.icon} alt={opt.label} className="w-6 h-6 object-contain mb-1" />
+                )}
                 <p className="text-xs font-semibold mb-0.5"
                   style={{ color: isSelected ? '#FDFBF7' : '#26170C' }}>
                   {opt.label}
                 </p>
                 <p className="text-xs" style={{ color: isSelected ? '#D4CCB0' : '#735C00' }}>
-                  {opt.description.split('.')[0]}
+                  {opt.desc}
                 </p>
-                {opt.price_idr > 0 && (
+                {opt.price > 0 && (
                   <p className="text-xs font-bold mt-1"
                     style={{ color: isSelected ? '#FFE088' : '#26170C' }}>
-                    + {formatIDR(opt.price_idr)}
+                    + {formatIDR(opt.price)}
                   </p>
                 )}
               </button>
@@ -50,6 +62,7 @@ export default function TransportMealSection() {
         </div>
       </div>
 
+      {/* Konsumsi */}
       <div>
         <p className="text-xs uppercase tracking-wide font-medium mb-3" style={{ color: '#735C00' }}>
           Pilihan Konsumsi

@@ -28,7 +28,7 @@ export default function BudgetSection() {
           {PRESET_BUTTONS.map((preset) => (
             <button key={preset.value}
               onClick={() => updateForm({ budget_preset: preset.value, budget_amount: preset.amount, is_no_limit: false })}
-              className="px-4 py-2 rounded-xl text-sm font-medium border transition-all"
+              className="px-3 md:px-4 py-2 rounded-xl text-xs md:text-sm font-medium border transition-all"
               style={{
                 background: budget_preset === preset.value && !is_no_limit ? '#26170C' : '#F9F6F0',
                 color: budget_preset === preset.value && !is_no_limit ? '#FDFBF7' : '#26170C',
@@ -39,7 +39,7 @@ export default function BudgetSection() {
           ))}
           <button
             onClick={() => updateForm({ is_no_limit: true, budget_preset: 'no_limit', budget_amount: null })}
-            className="px-4 py-2 rounded-xl text-sm font-medium border transition-all"
+            className="px-3 md:px-4 py-2 rounded-xl text-xs md:text-sm font-medium border transition-all"
             style={{
               background: is_no_limit ? '#26170C' : '#F9F6F0',
               color: is_no_limit ? '#FDFBF7' : '#26170C',

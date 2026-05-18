@@ -28,22 +28,26 @@ export default function HotelListModal() {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+    <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-4"
       style={{ background: 'rgba(0,0,0,0.5)' }}>
-      <div className="rounded-2xl w-full max-w-lg max-h-[85vh] flex flex-col shadow-2xl"
+      <div className="rounded-t-2xl md:rounded-2xl w-full md:max-w-lg max-h-[90vh] flex flex-col shadow-2xl"
         style={{ background: '#FDFBF7' }}>
 
-        <div className="flex items-center justify-between px-6 py-4 border-b"
+        {/* Handle bar untuk mobile */}
+        <div className="flex justify-center pt-3 pb-1 md:hidden">
+          <div className="w-10 h-1 rounded-full" style={{ background: '#D4CCB0' }} />
+        </div>
+
+        <div className="flex items-center justify-between px-4 md:px-6 py-3 md:py-4 border-b"
           style={{ borderColor: '#D4CCB0' }}>
-          <h2 className="font-semibold" style={{ color: '#26170C' }}>
+          <h2 className="font-semibold text-sm md:text-base" style={{ color: '#26170C' }}>
             Pilih Penginapan Tersedia
           </h2>
           <button onClick={() => store.setModal(null)}
-            className="text-xl font-light" style={{ color: '#735C00' }}>×</button>
+            className="text-xl font-light p-1" style={{ color: '#735C00' }}>×</button>
         </div>
 
-        {/* Distance filter */}
-        <div className="flex gap-2 px-6 py-3 border-b flex-wrap" style={{ borderColor: '#D4CCB0' }}>
+        <div className="flex gap-2 px-4 md:px-6 py-3 border-b flex-wrap" style={{ borderColor: '#D4CCB0' }}>
           {[
             { label: '< 100m', val: 100 },
             { label: '< 500m', val: 500 },
@@ -63,7 +67,7 @@ export default function HotelListModal() {
           ))}
         </div>
 
-        <div className="overflow-y-auto flex-1 px-6 py-4 space-y-4">
+        <div className="overflow-y-auto flex-1 px-4 md:px-6 py-4 space-y-4">
           {loading ? (
             <p className="text-center py-8 text-sm" style={{ color: '#735C00' }}>Memuat hotel...</p>
           ) : hotels.length === 0 ? (
@@ -77,12 +81,12 @@ export default function HotelListModal() {
               return (
                 <div key={hotel.id} className="rounded-xl border overflow-hidden"
                   style={{ borderColor: '#D4CCB0' }}>
-                  <div className="flex gap-4 p-4">
-                    <div className="w-24 h-20 rounded-lg flex-shrink-0 overflow-hidden flex items-center justify-center"
+                  <div className="flex gap-3 md:gap-4 p-3 md:p-4">
+                    <div className="w-20 h-16 md:w-24 md:h-20 rounded-lg flex-shrink-0 overflow-hidden flex items-center justify-center"
                       style={{ background: '#EAEAD1' }}>
                       {hotel.image_url
                         ? <img src={hotel.image_url} alt={hotel.name} className="w-full h-full object-cover" />
-                        : <span className="text-3xl">🏨</span>
+                        : <span className="text-2xl md:text-3xl">🏨</span>
                       }
                     </div>
                     <div className="flex-1 min-w-0">
@@ -91,21 +95,21 @@ export default function HotelListModal() {
                           <span key={i} className="text-xs" style={{ color: '#FFE088' }}>★</span>
                         ))}
                       </div>
-                      <p className="text-sm font-semibold" style={{ color: '#26170C' }}>{hotel.name}</p>
+                      <p className="text-sm font-semibold truncate" style={{ color: '#26170C' }}>{hotel.name}</p>
                       <p className="text-xs" style={{ color: '#735C00' }}>
                         📍 {hotel.distance_to_masjid_m}m dari Masjid {isMakkah ? 'Haram' : 'Nabawi'}
                       </p>
                       {room && (
-                        <div className="flex gap-3 mt-1 text-xs flex-wrap" style={{ color: '#735C00' }}>
+                        <div className="flex gap-2 md:gap-3 mt-1 text-xs flex-wrap" style={{ color: '#735C00' }}>
                           <span>✓ {room.room_type}</span>
                           <span>✓ {room.adult_capacity} pax</span>
-                          <span>✓ Check-in 14:00</span>
-                          <span>✓ Check-out 12:00</span>
+                          <span className="hidden md:inline">✓ Check-in 14:00</span>
+                          <span className="hidden md:inline">✓ Check-out 12:00</span>
                         </div>
                       )}
                     </div>
                   </div>
-                  <div className="flex items-center justify-between px-4 py-3 border-t"
+                  <div className="flex items-center justify-between px-3 md:px-4 py-2 md:py-3 border-t"
                     style={{ borderColor: '#D4CCB0', background: '#F9F6F0' }}>
                     <div>
                       <p className="text-xs" style={{ color: '#735C00' }}>Mulai dari</p>
@@ -115,7 +119,7 @@ export default function HotelListModal() {
                     </div>
                     <div className="flex gap-2">
                       <button onClick={() => handleDetail(hotel)}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium border transition-all"
+                        className="px-2 md:px-3 py-1.5 rounded-lg text-xs font-medium border transition-all hidden md:block"
                         style={{ borderColor: '#26170C', color: '#26170C', background: 'transparent' }}>
                         Lihat Detail & Kamar
                       </button>
